@@ -1,0 +1,19 @@
+<!--@subject {{trans "Welcome to %store_name" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+{{template config_path="design/email/header_template"}}
+<div style="background:#000;padding:20px;display:block;">
+    <img src="https://cleopatraweb.com/pub/media/logo/default/logo.png" width="150" />
+</div>
+<h1>{{trans "Check Out My Shopping Cart!"}}</h1>
+<p style="font-size: 14px;">
+    {{trans "Hi. I want to share my shopping cart from CLEOPATRAWEB.COM. To view my items, please click on the buy now button below."}}
+</p>
+<a href="https://cleopatraweb.com/checkout/cart/" target="blank_">
+    <img src="https://cleopatraweb.com/raw/buynow.png" />
+</a>
+<p>Copyrights &copy; CLEOPATRAWEB 2018.</p>
+{{template config_path="design/email/footer_template"}}

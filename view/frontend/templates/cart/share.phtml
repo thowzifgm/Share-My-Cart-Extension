@@ -1,0 +1,58 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: mohammad
+ * Date: 3/10/18
+ * Time: 11:18 PM
+ */
+?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+
+if ($customerSession->isLoggedIn()) {
+    $customerSession->getCustomerId();
+    $customerSession->getCustomerGroupId();
+    $customerSession->getCustomer();
+    $customerSession->getCustomerData();
+}
+
+$qid = 1;
+?>
+<div align="center">
+    <button type="button" title="Share My Cart" class="action primary open-modal"><span><i class="fa fa-user"></i><?php echo __("Share My Cart") ?></span></button>
+</div>
+<div id="custom-model-popup">
+    <p><?php echo __("Share your shopping cart with your freiends & family. We will send an email with link to them to purchase directly.") ?></p>
+    <form name="inviteform" id="inviteform" method="post" action="#" data-mage-init='{"validation":{}}'>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="name"><?php echo __("From:") ?></label>
+                <input type="text" id="iqname" name="iqname" data-validate="{required:true, 'validate-email':true}" value="<?php echo $customerSession->getCustomer()->getName(); ?>" />
+            </div>
+            <div class="col-md-6">
+                <label for="mail"><?php echo __("Invite E-mail:") ?></label>
+                <input type="email" id="iqmail" name="iqmail" data-validate="{required:true, 'validate-email':true}" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br />
+                <div style="background: #eeeeee;padding: 20px;">
+                    <label for="msg"><?php echo __("Message:") ?></label>
+                    <p style="font-size: 14px;"><?php echo __("Hi. I want to share my shopping cart from CLEOPATRAWEB.COM. To view my items, please click on the buy now button below.") ?></p>
+                    <a href="https://cleopatraweb.com/checkout/cart/" target="blank_"><img src="https://cleopatraweb.com/raw/buynow.png" /></a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id="responseq" align="center"></div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Smk_ShareCart/js/email/popup": {"quoteId": <?php /* @escapeNotVerified */ echo $qid; ?> }
+        }
+    }
+</script>
